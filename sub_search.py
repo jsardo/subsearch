@@ -1,8 +1,8 @@
 import praw
 import sys
 
-r = praw.Reddit("sub_search.py: search a subreddit for threads that
-                                "mention any one of the words given by
+r = praw.Reddit("sub_search.py: search a subreddit for threads that"
+                                "mention any one of the words given by"
                                 "the user")
 
 def get_subname(s):
