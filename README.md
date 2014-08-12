@@ -10,11 +10,10 @@ usage
 
 example
 =======
-
-    python sub_search.py sub=python words=[django, flask, pypy, api, html, javascript] 50
-    1: http://redd.it/25qqrp
-    2: http://redd.it/25q0mx
-    3: http://redd.it/25nztu
+     python sub_search.py sub=programming words=[python, api, flask, javascript] 25
+     1: http://redd.it/2dbzpl (found "python" in title)
+     2: http://redd.it/2d8zqf (found "python" in title)
+     3: http://redd.it/2ddhir (found "javascript" in title)
 
 caveat
 ======
