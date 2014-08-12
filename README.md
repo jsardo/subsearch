@@ -16,9 +16,16 @@ example
     2: http://redd.it/25q0mx
     3: http://redd.it/25nztu
 
+caveat
+======
+
+with the recent addition of comment parsing the script now takes a very long time to execute.
+keep this in mind when searching a large subreddit with large comment threads.  
+
 coming soon
 ===========
 
 * choice to ignore case or not
 * extend search to multiple subreddits
 * search for a string containing multiple words
+* choice to search the submission's title, body, and comments or a combination of the three.
