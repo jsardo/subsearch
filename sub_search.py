@@ -6,28 +6,30 @@ r = praw.Reddit("sub_search.py: search a subreddit for threads that"
                                 "the user")
 
 def get_subname(s):
-    if s[:10] != "subreddit=":
+    if s[:4] != "sub=":
         print "error: invalid syntax"
         sys.exit()
 
-    return s[10:]
+    return s[4:]
 
 def parse_words(s):
     words = []
-    if s[:7] != "words=[":
+    i = 0
+    while s[i:i+7] != "words=[":
+        i += 1
+    if i == len(s):
         print "error: invalid syntax"
         sys.exit()
 
-    c = 7
-    word = []
-    while s[c] != ']':
-        word.append(s[c])
-        c += 1
-        if s[c] == ',' or s[c] == ']':
-            words.append("".join(word))
-            word = []
-            if (s[c] != ']'):
-                c += 1
+    start = i+7
+    end   = start
+    while s[end] != ']':
+        end += 1
+
+    words = s[start:end].split(',')
+    for i in range(len(words)):
+        words[i] = words[i].strip()
+   
     return words
 
 def sub_search(words, name, n):
@@ -49,16 +51,9 @@ def sub_search(words, name, n):
             seen.append(submission.id)
 
 def main():
-    if len(sys.argv) != 4:
-        print "error: program requires three arguments:\n"
-        print "       subreddit=<subreddit name> words=[<words to search for>] <search limit>"
-        sys.exit()
-
     sub_name = get_subname(sys.argv[1])
-    words    = parse_words(sys.argv[2])
-    n        = sys.argv[3]
+    words    = parse_words(" ".join(sys.argv))
+    n        = int(sys.argv[len(sys.argv)-1])
     sub_search(words, sub_name, n) 
 
-
 main()
-
