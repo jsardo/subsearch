@@ -41,10 +41,23 @@ def sub_search(words, name, n):
         title = submission.title.lower().split()
         text  = submission.selftext.lower().split()
 
-        has_word = any(string in text or string in title for string in words)
+        found    = False
+        is_body  = False
+        is_title = False
 
-        if submission.id not in seen and has_word:
-            print "%d: %s" % (i, submission.short_link)
+        for string in words:
+            if string in text or string in title:
+                s = string
+                found = True
+                if string in title:
+                    is_title = True
+                elif string in text:
+                    is_body = True
+                
+
+        if submission.id not in seen and found:
+            print "%2d: %s (found \"%s\" in %s)" % (i, submission.short_link, s,
+                                                   "title" if is_title else "body")
             i += 1
             if i > n:
                 return 0
